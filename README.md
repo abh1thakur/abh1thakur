@@ -1,7 +1,7 @@
 The main components of terraform scirpt are mentioned below:
-1. provider.tf : holds information about region and authentication prpfile to be used.
-2. backend.tf: holds information about verion of aws provider and source of it.external backend can be added here if required, sample config has been mentioned.
-3. init.sh : This is a bash script which will get executed in userdata section during instance boot. It will install all required packages and run docker conatiners.
+1. provider.tf : Holds information about region and authentication profile to be used.
+2. backend.tf: Holds information about verion of aws provider and source of it. External backend can be added here if required, sample config has been mentioned.
+3. init.sh : This is a bash script which will execute in userdata section during instance boot. It will install all required packages and run docker conatiners.
 4. main.tf : This file has code to create ec2 instance using amazon linux AMI, along Applicaiton and database conatiners running in it.
 5. variables.tf and terraform.tfvars : These files contains defined variables information which can vary environment to environment.
 
