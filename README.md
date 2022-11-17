@@ -11,4 +11,4 @@ Prerequisites to run teraform script to launch instance with docker installed in
 3. Create a public and private key which will be used to access ec2 instance through ssh and change public key location in terraform.tfvars file.
 4. Change vpc id in terraform.tfvars
 4. Change myip variable value to your machine ip from where traffic should be allowed on port 3000 and 22.
-5. Script is expecting a subnet inside your vpc with tag "Purpose" = "public" and subnet id is not hard
+5. Script is expecting a subnet inside your vpc with tag "Purpose" = "public", make sure to add required tag.
