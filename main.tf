@@ -7,19 +7,16 @@ resource "aws_key_pair" "deployer" {
   public_key = file("${var.pub_key}")
 }
 
-data "aws_subnet" "public_subnet" {
-  vpc_id = var.vpc
-  tags = {
-    "Purpose" = "public"
-  }
+data "aws_ami" "ami-id" {
+    name_regex = "amzn2-ami-kernel-5.10-hvm-2.0.20221103.3-x86_64-gp2"
+    owners = [ "amazon" ]
 }
 resource "aws_instance" "webapp" {
-  ami                         = "ami-09d3b3274b6c5d4aa"
+  ami                         = data.aws_ami.ami-id.id
   instance_type               = var.instance_type
-  subnet_id                   = data.aws_subnet.public_subnet.id
   associate_public_ip_address = true
   key_name                    = aws_key_pair.deployer.key_name
-  security_groups = [aws_security_group.webapp.id]
+  vpc_security_group_ids = [aws_security_group.webapp.id]
   user_data = file("./init.sh")
   tags = {
     "Name" = "webapp-${local.instance_name}"
