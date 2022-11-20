@@ -7,8 +7,13 @@
 
 **Prerequisites to run teraform script to launch instance with docker installed in it along with app and db contaainers running:**
 - aws cli should be configured on system from which terraform script is being invoked.
-- Change `profile name` in backend.tf to whatever configured during aws cli configuration.
-- Create a public and private key which will be used to access ec2 instance through ssh and change public key location in `terraform.tfvars` file.
-- Change `vpc id` in `terraform.tfvars`
-- Change `myip variable` value to your machine ip from where traffic should be allowed on `port 3000 and 22`.
-- Script is expecting a subnet inside your vpc with `tag "Purpose" = "public"`, make sure to add required tag.
+- Change below mentioned variables according to your environment in `terraform.tfvars` file.
+~~~
+$ cat terraform.tfvars 
+vpc="<vpc-id>"
+pub_key = "<public-key-location>"
+myip = "<source ip for traffic whitelisting in security group>" // Get ipv4 public ip from https://whatismyipaddress.com/
+instance_type="<instance-type>"                                 // e.g t2.micro
+region = ""                                                     // Region to create resources in e.g.us-east-1
+profile = ""                                                    // aws configure profile to use credentials from
+~~~
